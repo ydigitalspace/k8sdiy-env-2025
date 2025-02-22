@@ -1,10 +1,11 @@
-# GitHub via PAT
+# Flux Operator with Ephemeral Environments
 
-The example demonstrates how to bootstrap a KinD cluster with Flux Operator using a GitHub repository via a [personal access token (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+The example demonstrates how to bootstrap a KinD cluster with Flux Operator using a GitHub repository via [Ephemeral Environments](https://fluxcd.control-plane.io/operator/resourcesets/github-pull-requests/).
 
-We recommend creating a fine-gained PAT and dedicated Flux user, for more information see [here](https://fluxcd.io/flux/installation/bootstrap/github/#github-organization)
+Note: The GitHub repository* is created and auto initialised ready for Flux to use.
 
-Note: The GitHub repository is created and auto initialised ready for Flux to use.
+###### *Creating a fine-gained PAT and dedicated Flux user recommend, for more information see [here](https://fluxcd.io/flux/installation/bootstrap/github/#github-organization)
+
 
 ## Quick Start
 
