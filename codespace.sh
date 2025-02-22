@@ -1,5 +1,5 @@
 
-#!/bin/bash
+#!/usr/bin/zsh
 
 # Install OpenTofu
 curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method standalone 
@@ -25,7 +25,6 @@ echo
 export TF_VAR_github_org="$TF_VAR_github_org"
 export TF_VAR_github_repository="$TF_VAR_github_repository"
 export TF_VAR_github_token="$TF_VAR_github_token"
-export KUBECONFIG=./flux-ops-config
 
 # Optionally, you can print the variables to verify (token is hidden)
 echo "GitHub Organization: $TF_VAR_github_org"
@@ -38,4 +37,4 @@ tofu apply
 # Create alias for k9s, kubectl and command-line autocompletion
 alias kk="EDITOR='code --wait' k9s"
 alias k=kubectl
-source <(kubectl completion zsh)
+# source <(kubectl completion zsh)
