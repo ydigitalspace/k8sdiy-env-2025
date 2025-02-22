@@ -20,7 +20,6 @@ terraform {
 # ==========================================
 # Construct KinD cluster
 # ==========================================
-
 resource "kind_cluster" "this" {
   name = var.cluster_name
   wait_for_ready = true
@@ -29,7 +28,6 @@ resource "kind_cluster" "this" {
 # ==========================================
 # Initialise a Github project
 # ==========================================
-
 resource "github_repository" "this" {
   name        = var.github_repository
   description = var.github_repository
@@ -41,7 +39,7 @@ resource "github_repository" "this" {
 }
 
 # ==========================================
-# Bootstrap KinD cluster
+# Bootstrap Flux Operator
 # ==========================================
 resource "helm_release" "flux_operator" {
   depends_on = [kind_cluster.this]
@@ -52,6 +50,9 @@ resource "helm_release" "flux_operator" {
   create_namespace = true
 }
 
+# ==========================================
+# Bootstrap Flux Instance
+# ==========================================
 resource "helm_release" "flux_instance" {
   depends_on = [helm_release.flux_operator]
 

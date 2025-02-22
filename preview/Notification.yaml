@@ -6,8 +6,16 @@ metadata:
   namespace: app-preview
 spec:
   type: discord
-  channel: general
-  address: hhttps://discord.com/api/webhooks/1342881189115199612/JL3CuBozI4DFelztw35VZ2l4rnT6rSTQiO0Yvi6TSEyKkBrNbQc5amstSZwQhBpvfmCi
+  secretRef:
+    name: discord-webhook
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: discord-webhook
+  namespace: app-preview
+stringData:
+  address: https://discord.com/api/webhooks/1342881189115199612/JL3CuBozI4DFelztw35VZ2l4rnT6rSTQiO0Yvi6TSEyKkBrNbQc5amstSZwQhBpvfmCi
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert

@@ -45,7 +45,7 @@ spec:
               name: app-<< inputs.id >>
         values:
           image:
-            tag: << inputs.sha >>
+            tag: sha-<< inputs.sha >>
           ingress:
             hosts:
               - host: app-<< inputs.id >>.example.com

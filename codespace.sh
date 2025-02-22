@@ -1,11 +1,13 @@
 
-#!/usr/bin/zsh
+#!/bin/bash
 
 # Install OpenTofu
 curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method standalone 
 
 # Instrall K9S to manage the cluster
 curl -sS https://webi.sh/k9s | sh
+curl -s https://fluxcd.io/install.sh | sh
+. <(flux completion zsh)
 
 # Initialize Tofu
 cd bootstrap
@@ -38,3 +40,9 @@ tofu apply
 alias kk="EDITOR='code --wait' k9s"
 alias k=kubectl
 # source <(kubectl completion zsh)
+
+
+flux -n app-preview create secret git github-auth \
+  --url=https://github.com/org/app \
+  --username=flux \
+  --password=${GITHUB_TOKEN}
