@@ -1,8 +1,8 @@
 # Flux Operator with Ephemeral Environments
 
-The example demonstrates how to bootstrap a KinD cluster with Flux Operator using a GitHub repository via [Ephemeral Environments](https://fluxcd.control-plane.io/operator/resourcesets/github-pull-requests/) with Descord notifications 
+The example demonstrates how to create Preview Environments based on Pull Request event with Flux Operator and [Ephemeral Environments](https://fluxcd.control-plane.io/operator/resourcesets/github-pull-requests/).
 
-Note: The GitHub repository* is created and auto initialised ready for Flux to use.
+Note: The GitHub repository* is created and auto initialised ready for Flux stack, Flux Operator and Discord notifications to use.
 
 ###### *Creating a fine-gained PAT and dedicated Flux user recommend, for more information see [here](https://fluxcd.io/flux/installation/bootstrap/github/#github-organization)
 
