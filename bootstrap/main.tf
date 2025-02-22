@@ -22,7 +22,7 @@ terraform {
 # ==========================================
 
 resource "kind_cluster" "this" {
-  name = "flux-ops"
+  name = var.cluster_name
 }
 
 # ==========================================
@@ -39,20 +39,11 @@ resource "github_repository" "this" {
   vulnerability_alerts = true
 }
 
-
 # ==========================================
 # Bootstrap KinD cluster
 # ==========================================
-
-resource "flux_bootstrap_git" "this" {
-  depends_on = [github_repository.this]
-
-  embedded_manifests = true
-  path               = "clusters/my-cluster"
-}
-
-
 resource "helm_release" "flux_operator" {
+  depends_on = [kind_cluster.this]
   name             = "flux-operator"
   namespace        = "flux-system"
   repository       = "oci://ghcr.io/controlplaneio-fluxcd/charts"
@@ -67,8 +58,4 @@ resource "helm_release" "flux_instance" {
   namespace  = "flux-system"
   repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
   chart      = "flux-instance"
-
-  # values = [
-  #   file("values/components.yaml")
-  # ]
 }

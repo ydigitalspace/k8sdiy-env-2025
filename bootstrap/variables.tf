@@ -13,3 +13,8 @@ variable "github_token" {
   sensitive   = true
   type        = string
 }
+variable "cluster_name" {
+  description = "Cluster Name"
+  type        = string
+  default       = "flux-preview"
+}
