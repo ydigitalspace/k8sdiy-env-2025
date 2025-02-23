@@ -42,7 +42,7 @@ alias k=kubectl
 # source <(kubectl completion zsh)
 
 
-flux -n app-preview create secret git github-auth \
-  --url=https://github.com/org/app \
-  --username=flux \
-  --password=${GITHUB_TOKEN}
+# flux -n app-preview create secret git github-auth \
+#   --url=https://github.com/org/app \
+#   --username=flux \
+#   --password=${GITHUB_TOKEN}

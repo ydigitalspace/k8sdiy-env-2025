@@ -44,8 +44,18 @@ spec:
               kind: GitRepository
               name: app-<< inputs.id >>
         values:
+          gateway:
+            hostname: quietly-just-ferret.ngrok-free.app
+            path: /a
           image:
-            tag: sha-<< inputs.sha >>
+            tag: pr-<< inputs.id >>
           ingress:
             hosts:
               - host: app-<< inputs.id >>.example.com
+          filters:
+            filters:
+            - type: URLRewrite
+              urlRewrite:
+                path:
+                  replacePrefixMatch: /
+                  type: ReplacePrefixMatch

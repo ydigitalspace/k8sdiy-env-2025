@@ -1,11 +1,13 @@
 variable "github_org" {
   description = "GitHub organization"
   type        = string
+  default = "den-vasyliev"
 }
 
 variable "github_repository" {
   description = "GitHub repository"
   type        = string
+  default = "flux-preview"
 }
 
 variable "github_token" {
@@ -16,5 +18,5 @@ variable "github_token" {
 variable "cluster_name" {
   description = "Cluster Name"
   type        = string
-  default       = "flux-preview"
+  default     = "flux-preview"
 }
