@@ -20,7 +20,7 @@ read -p "Enter your GitHub organization: " TF_VAR_github_org
 read -p "Enter your GitHub repository: " TF_VAR_github_repository
 
 # Prompt the user to enter the GitHub token securely
-read -s -p "Enter your GitHub token: " TF_VAR_github_token
+read -s -p "Enter your GitHub token: "
 echo 
 
 # Export GitHub organization, repository, and token as environment variables

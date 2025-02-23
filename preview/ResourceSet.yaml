@@ -46,12 +46,9 @@ spec:
         values:
           gateway:
             hostname: quietly-just-ferret.ngrok-free.app
-            path: /a
+            path: /<< inputs.id >>
           image:
             tag: pr-<< inputs.id >>
-          ingress:
-            hosts:
-              - host: app-<< inputs.id >>.example.com
           filters:
             filters:
             - type: URLRewrite
