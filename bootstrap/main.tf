@@ -71,7 +71,7 @@ resource "helm_release" "kbot_app" {
     }
   set {
       name  = "gateway.path"
-      value = "/prod"
+      value = "/health"
     }
   
 }
