@@ -14,9 +14,9 @@ terraform {
       source  = "tehcyx/kind"
       version = ">= 0.8"
     }
-    helm3 = {
+    helm = {
       source  = "hashicorp/helm"
-      version = "3.0.0-pre1"
+      version = "2.17.0"
     }
   }
 }
@@ -44,7 +44,7 @@ provider "github" {
 provider "kind" {}
 
 provider "helm" {
-  kubernetes = {
+  kubernetes {
     host                   = kind_cluster.this.endpoint
     client_certificate     = kind_cluster.this.client_certificate
     client_key             = kind_cluster.this.client_key
