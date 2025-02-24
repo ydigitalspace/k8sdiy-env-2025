@@ -41,7 +41,7 @@ alias kk="EDITOR='code --wait' k9s"
 alias k=kubectl
 # source <(kubectl completion zsh)
 
-# kubectl create secret generic kbot --from-literal=token=$TELE_TOKEN
+# kubectl create secret generic kbot --from-literal=token=$TELE_TOKEN -n app-preview
 #
 # export ENVOY_SERVICE=$(kubectl get svc -n envoy-gateway-system --selector=gateway.envoyproxy.io/owning-gateway-namespace=default,gateway.envoyproxy.io/owning-gateway-name=eg -o jsonpath='{.items[0].metadata.name}')
 #
