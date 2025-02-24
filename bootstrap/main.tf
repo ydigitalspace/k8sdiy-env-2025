@@ -14,6 +14,10 @@ terraform {
       source  = "tehcyx/kind"
       version = ">= 0.8"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "3.0.0-pre1"
+    }
   }
 }
 
@@ -83,5 +87,5 @@ resource "helm_release" "kbot_app" {
   namespace  = "default"
   repository = "oci://ghcr.io/den-vasyliev/charts"
   chart      = "helm"
-  version    = "2.0.4"
+  version    = "2.0.8"
 }
