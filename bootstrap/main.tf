@@ -64,7 +64,7 @@ resource "helm_release" "kbot_app" {
   namespace  = "default"
   repository = "oci://ghcr.io/den-vasyliev/charts"
   chart      = "helm"
-  version    = "2.0.8"
+  version    = "2.0.9"
   set {
       name  = "gateway.hostname"
       value = "quietly-just-ferret.ngrok-free.app"

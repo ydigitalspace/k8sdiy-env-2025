@@ -41,7 +41,12 @@ alias kk="EDITOR='code --wait' k9s"
 alias k=kubectl
 # source <(kubectl completion zsh)
 
-
+# kubectl create secret generic kbot --from-literal=token=$TELE_TOKEN
+#
+# export ENVOY_SERVICE=$(kubectl get svc -n envoy-gateway-system --selector=gateway.envoyproxy.io/owning-gateway-namespace=default,gateway.envoyproxy.io/owning-gateway-name=eg -o jsonpath='{.items[0].metadata.name}')
+#
+# kubectl -n envoy-gateway-system port-forward service/${ENVOY_SERVICE} 8888:80 &
+#
 # flux -n app-preview create secret git github-auth \
 #   --url=https://github.com/org/app \
 #   --username=flux \
