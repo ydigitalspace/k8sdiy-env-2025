@@ -1,5 +1,12 @@
 
 #!/bin/bash
+# Install Homebrew (OPTIONAL)
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# # Install Terraform, Flux, and htop using Homebrew
+## hashicorp/tap/terraform opentofu 
+# yes|brew install tenv fluxcd/tap/flux htop kind 
 
 # Install OpenTofu
 curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method standalone 
@@ -47,7 +54,9 @@ alias k=kubectl
 #
 # kubectl -n envoy-gateway-system port-forward service/${ENVOY_SERVICE} 8888:80 &
 #
+# k apply -f preview
 # flux -n app-preview create secret git github-auth \
 #   --url=https://github.com/org/app \
 #   --username=flux \
 #   --password=${GITHUB_TOKEN}
+# # kubectl create secret generic github-auth --from-literal=token=${GITHUB_TOKEN} -n app-preview

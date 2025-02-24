@@ -10,6 +10,7 @@ resource "kind_cluster" "this" {
 # Initialise a Github project
 # ==========================================
 resource "github_repository" "this" {
+  count = 0
   name        = var.github_repository
   description = var.github_repository
   visibility  = "private"
@@ -59,19 +60,19 @@ resource "helm_release" "envoy_gateway" {
 # Bootstrap Kbot Application
 # ==========================================
 resource "helm_release" "kbot_app" {
-  depends_on = [kind_cluster.this]
+  depends_on = [helm_release.envoy_gateway]
   name       = "kbot"
   namespace  = "default"
   repository = "oci://ghcr.io/den-vasyliev/charts"
   chart      = "helm"
-  version    = "2.0.9"
+  version    = "2.1.0"
   set {
       name  = "gateway.hostname"
       value = "quietly-just-ferret.ngrok-free.app"
     }
   set {
       name  = "gateway.path"
-      value = "/health"
+      value = "/prod"
     }
   
 }
