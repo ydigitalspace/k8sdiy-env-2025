@@ -20,6 +20,12 @@ kubectl apply -f gateway
 kubectl apply -f preview
 ```
 
+## Cleanup
+``` bash
+cd bootstrap
+tofu destroy
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
