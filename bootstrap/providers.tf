@@ -1,3 +1,25 @@
+terraform {
+  required_version = ">= 1.9.0"
+
+  required_providers {
+    flux = {
+      source  = "fluxcd/flux"
+      version = ">= 1.5"
+    }
+    github = {
+      source  = "integrations/github"
+      version = ">= 6.1"
+    }
+    kind = {
+      source  = "tehcyx/kind"
+      version = ">= 0.8"
+    }
+    helm = {
+      source = "hashicorp/helm"
+      version = "3.0.0-pre1"
+    }
+  }
+}
 provider "flux" {
   kubernetes = {
     host                   = kind_cluster.this.endpoint
