@@ -66,9 +66,9 @@ resource "helm_release" "kbot_app" {
   chart      = "helm"
   version    = "2.0.8"
   set = [
-  {
-    name  = "gateway.hostname"
-    value = "quietly-just-ferret.ngrok-free.app"
-  }
+    {
+      name  = "gateway.hostname"
+      value = "quietly-just-ferret.ngrok-free.app"
+    }
   ]
 }

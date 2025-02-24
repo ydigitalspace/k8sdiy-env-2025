@@ -1,13 +1,13 @@
 variable "github_org" {
   description = "GitHub organization"
   type        = string
-  default = "den-vasyliev"
+  default     = "den-vasyliev"
 }
 
 variable "github_repository" {
   description = "GitHub repository"
   type        = string
-  default = "flux-preview-0"
+  default     = "flux-preview-0"
 }
 
 variable "github_token" {
