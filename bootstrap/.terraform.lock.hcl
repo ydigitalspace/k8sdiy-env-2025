@@ -6,6 +6,7 @@ provider "registry.opentofu.org/fluxcd/flux" {
   constraints = ">= 1.5.0"
   hashes = [
     "h1:+1KXDzvJ9Gip4b+HggTHsFx/9lP9onASJiD4rtM9QeQ=",
+    "h1:/MOGDbWyhq4VjohEFwgRuqxWm6mpNpS08wrB+aHH0oM=",
     "zh:0f5f7663de6361ddfbdaceb9f53ec9b83aa0540adae69d1dd364977fd2abf0e0",
     "zh:1326f703adaec7c7ebd3cc3089bcae462b88cb8f515d1d9ce66ed655ade7b582",
     "zh:33175477b4153b8f720848786562614b427862ef5f80b80805cd158a7877ed95",
@@ -27,6 +28,7 @@ provider "registry.opentofu.org/hashicorp/helm" {
   version     = "2.17.0"
   constraints = "2.17.0"
   hashes = [
+    "h1:69PnHoYrrDrm7C8+8PiSvRGPI55taqL14SvQR/FGM+g=",
     "h1:ShIag7wqd5Rs+zYpVMpjAh+T0ozr4XGYfSTKWqceQBY=",
     "zh:02690815e35131a42cb9851f63a3369c216af30ad093d05b39001d43da04b56b",
     "zh:27a62f12b29926387f4d71aeeee9f7ffa0ccb81a1b6066ee895716ad050d1b7a",
@@ -45,6 +47,7 @@ provider "registry.opentofu.org/integrations/github" {
   version     = "6.5.0"
   constraints = ">= 6.1.0"
   hashes = [
+    "h1:ikIBPXI5lx7cV4aqLWYuL+LQnHmf+FybvdpcsfAqK4o=",
     "h1:rMuaCjyJo4zR9CKZoB1kCpZ9pZke4rlfd+ea0vCpaVg=",
     "zh:3088bfd30c51ebfcb7c8d829465ec7b3c19af684cf1aff1ea1111ad3c6421c11",
     "zh:34f9054b0123f9fa7ab8ebc73591d2cf502f1cc75e7594bde42ce799fcac32b6",
@@ -69,6 +72,7 @@ provider "registry.opentofu.org/tehcyx/kind" {
   constraints = ">= 0.8.0"
   hashes = [
     "h1:UwJjL+WkRYoFRd9a/jDX7pPGYLQiXfLSesWwU+5n9H0=",
+    "h1:XU9venmnQH9nyspWhmVpygiWR5kZtn5m0lf+62VuqtA=",
     "zh:68994ea296bc704069a140c198155b7a6d345837f9dabd5c39bb17d957ca1ef3",
     "zh:724cb92ca5e917039da9f43d115a3b8471b007f78f904b3884c5adfe0ca9bd79",
     "zh:7d149ba9087fac3b767b4ce78a779ec77dee3cac899d5d4c3da25ace5f332d2a",
