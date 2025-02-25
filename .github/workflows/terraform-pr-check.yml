@@ -1,0 +1,45 @@
+name: Terraform PR Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**.tf'
+      - '**.tfvars'
+
+jobs:
+  terraform-check:
+    name: Terraform Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: terraform fmt
+        uses: dflook/terraform-fmt-check@v1
+
+      - name: terraform validate
+        uses: dflook/terraform-validate@v1
+        
+      - name: terraform plan
+        uses: dflook/terraform-plan@v1
+        with:
+          fail-on-diff: true
+
+  security-check:
+    name: Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: terraform
+          quiet: true
+          soft_fail: false 
