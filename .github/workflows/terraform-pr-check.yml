@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - master
     paths:
       - '**.tf'
       - '**.tfvars'
@@ -26,7 +27,8 @@ jobs:
       - name: terraform plan
         uses: dflook/terraform-plan@v1
         with:
-          plan-fail-conditions: "Terraform plan would make changes"
+          path: bootstrap
+          add_github_comment: false
 
   security-check:
     name: Security Check
@@ -53,7 +55,13 @@ jobs:
           soft_fail: false
           format: sarif
           
-      - name: Run git-secrets
-        uses: awslabs/git-secrets@master
-        with:
-          args: --scan 
+      - name: Install git-secrets
+        run: |
+          git clone https://github.com/awslabs/git-secrets.git
+          cd git-secrets
+          sudo make install
+          
+      - name: Configure git-secrets
+        run: |
+          git secrets --register-aws
+          git secrets --scan 
