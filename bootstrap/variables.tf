@@ -14,6 +14,7 @@ variable "github_token" {
   description = "GitHub token"
   sensitive   = true
   type        = string
+  default     = null
 }
 variable "cluster_name" {
   description = "Cluster Name"
