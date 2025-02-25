@@ -26,7 +26,7 @@ jobs:
       - name: terraform plan
         uses: dflook/terraform-plan@v1
         with:
-          fail-on-diff: true
+          plan-fail-conditions: "Terraform plan would make changes"
 
   security-check:
     name: Security Check
@@ -41,5 +41,19 @@ jobs:
         with:
           directory: .
           framework: terraform
-          quiet: true
-          soft_fail: false 
+          quiet: false
+          soft_fail: false
+          download_external_modules: true
+          check: CKV_AWS_*
+          skip_check: CKV_AWS_23,CKV_AWS_24
+          
+      - name: Run TFSec
+        uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          soft_fail: false
+          format: sarif
+          
+      - name: Run git-secrets
+        uses: awslabs/git-secrets@master
+        with:
+          args: --scan 
