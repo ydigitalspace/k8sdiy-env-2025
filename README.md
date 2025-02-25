@@ -12,12 +12,12 @@ Note: The GitHub repository* is created and auto initialised ready for Flux stac
 
 ``` bash
 bash ./codespace.sh
+kubectl apply -f gateway
+kubectl apply -f preview
 flux -n app-preview create secret git github-auth \
    --url=https://github.com/org/app \
    --username=flux \
    --password=${GITHUB_TOKEN}
-kubectl apply -f gateway
-kubectl apply -f preview
 ```
 
 ## Cleanup
