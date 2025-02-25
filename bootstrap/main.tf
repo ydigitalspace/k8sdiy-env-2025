@@ -10,7 +10,7 @@ resource "kind_cluster" "this" {
 # Initialise a Github project
 # ==========================================
 resource "github_repository" "this" {
-  count = 0
+  count       = 0
   name        = var.github_repository
   description = var.github_repository
   visibility  = "private"
@@ -67,12 +67,12 @@ resource "helm_release" "kbot_app" {
   chart      = "helm"
   version    = "2.1.0"
   set {
-      name  = "gateway.hostname"
-      value = "quietly-just-ferret.ngrok-free.app"
-    }
+    name  = "gateway.hostname"
+    value = "quietly-just-ferret.ngrok-free.app"
+  }
   set {
-      name  = "gateway.path"
-      value = "/prod"
-    }
-  
+    name  = "gateway.path"
+    value = "/prod"
+  }
+
 }
