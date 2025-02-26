@@ -10,8 +10,8 @@ Note: The GitHub repository* is created and auto initialised ready for Flux stac
 
 ## Quick Start
 
-``` bash
-bash ./codespace.sh
+``` bash   
+bash ./codespace.sh   ###  Before run it, check which terminal you are using and review comment inside of file (part: install K9S) to avoid errors
 kubectl apply -f gatewayapi
 kubectl apply -f preview
 flux -n app-preview create secret git github-auth \
