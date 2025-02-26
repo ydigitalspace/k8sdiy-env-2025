@@ -104,3 +104,8 @@ https://github.com/den-vasyliev/go-demo-app
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 helm repo update
 helm upgrade --install --set args={--kubelet-insecure-tls} metrics-server metrics-server/metrics-server --namespace kube-system
+
+
+helm install demo ./helm --create-namespace -n demo
+kubectl port-forward svc/envoy-demo-eg-0d68e7be -n demo 8888:80
+curl -F 'image=@/tmp/g.png' localhost:8888/api -HHost:demo.example.com
