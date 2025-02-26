@@ -105,7 +105,8 @@ helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 helm repo update
 helm upgrade --install --set args={--kubelet-insecure-tls} metrics-server metrics-server/metrics-server --namespace kube-system
 
-
+## Helm chart
 helm install demo ./helm --create-namespace -n demo
 kubectl port-forward svc/envoy-demo-eg-0d68e7be -n demo 8888:80
+wget -O /tmp/g.png https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png
 curl -F 'image=@/tmp/g.png' localhost:8888/api -HHost:demo.example.com
