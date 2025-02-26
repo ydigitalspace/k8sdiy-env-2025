@@ -8,13 +8,15 @@
 ## hashicorp/tap/terraform opentofu 
 # yes|brew install tenv fluxcd/tap/flux htop kind 
 
+
+
 # Install OpenTofu
 curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method standalone 
 
 # Install K9S to manage the cluster
 curl -sS https://webi.sh/k9s | sh
-curl -s https://fluxcd.io/install.sh | sh  ## To avoid errors, for bash terminal you may update this line to: curl -s https://fluxcd.io/install.sh | bash 
-. <(flux completion zsh)   ## To avoid errors, for bash terminal you may update this line to:  . <(flux completion bash)
+curl -s https://fluxcd.io/install.sh | $(basename "$SHELL")  ## To avoid errors, for bash terminal you may update this line to: curl -s https://fluxcd.io/install.sh | bash 
+. <(flux completion $(basename "$SHELL"))   ## To avoid errors, for bash terminal you may update this line to:  . <(flux completion bash)
 
 # Initialize Tofu
 cd bootstrap
