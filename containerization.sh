@@ -10,7 +10,9 @@ sudo apt-get install stress cgroup-tools
 brew install skopeo dive trivy
 
 #####
-# Install cgroup-tools
+# Install cgroup-tools v2
+sudo chmod o+w /etc/apt/sources.list
+echo "deb http://cz.archive.ubuntu.com/ubuntu jammy main universe" >>/etc/apt/sources.list
 sudo add-apt-repository universe
 sudo apt update
 sudo apt install cgroup-tools
