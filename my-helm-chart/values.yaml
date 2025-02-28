@@ -1,0 +1,14 @@
+description: A Helm chart for deploying a simple HTTP server
+version: 0.1.0
+appVersion: v1.0.0
+replicaCount: 1
+
+image:
+  repository: busybox
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources: {}
