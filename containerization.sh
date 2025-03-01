@@ -3,9 +3,6 @@
 ####
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# Install stress tool
-sudo apt-get install stress cgroup-tools
-
 ### Install Skopeo and Dive
 brew install skopeo dive trivy
 
@@ -15,7 +12,7 @@ sudo chmod o+w /etc/apt/sources.list
 echo "deb http://cz.archive.ubuntu.com/ubuntu jammy main universe" >>/etc/apt/sources.list
 sudo add-apt-repository universe
 sudo apt update
-sudo apt install cgroup-tools
+sudo apt install cgroup-tools stress
 #####
 ls -l /sys/fs/cgroup
 # Create a unified/cg1 cgroup
