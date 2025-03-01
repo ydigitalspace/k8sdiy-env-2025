@@ -6,7 +6,7 @@
 Це завдання фокусується на переключені режиму мережевого проксі Kubernetes з iptables на IPVS (IP Virtual Server) для покращення продуктивності та масштабованості. IPVS забезпечує кращу продуктивність для великих кластерів, оскільки використовує більш ефективні структури даних (хеш-таблиці) порівняно з лінійними списками iptables.
 
 ### Steps:
-1. **Configure Kind Cluster with IPVS in your main.tf file **
+1. **Configure and create KinD Cluster with IPVS in your main.tf file **
    ```hcl
    networking {
        kube_proxy_mode = "ipvs"
