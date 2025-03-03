@@ -13,14 +13,6 @@ compdef kubecolor=kubectl
 curl -sS https://webi.sh/k9s | sh
 alias kk="EDITOR='code --wait' k9s"
 
-
-# Disables IPv6 for Docker and installs K3S
-#
-# sudo tee /etc/docker/daemon.json >/dev/null <<-EOF
-# {
-#   "ip6tables": false,
-#   "ipv6": false
-# }
-# EOF
-# sudo pkill dockerd && sudo pkill containerd
-# bash /usr/local/share/docker-init.sh
+## https://docs.fluentbit.io/manual/installation/kubernetes
+helm repo add fluent https://fluent.github.io/helm-charts
+helm upgrade --install fluent-bit fluent/fluent-bit
