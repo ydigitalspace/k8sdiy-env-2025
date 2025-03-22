@@ -19,5 +19,5 @@ variable "github_token" {
 variable "cluster_name" {
   description = "Cluster Name"
   type        = string
-  default     = "flux-preview"
+  default     = "flux-preview-0"
 }

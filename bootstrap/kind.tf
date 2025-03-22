@@ -16,5 +16,11 @@ resource "kind_cluster" "this" {
     node {
       role = "worker"
     }
+<<<<<<< HEAD
+=======
+    networking {
+      kube_proxy_mode = "ipvs"
+   }
+>>>>>>> cleanup/bootstrap
   }
 }
