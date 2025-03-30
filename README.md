@@ -1,63 +1,122 @@
-# K8S DIY
-# Flux Operator with Ephemeral Environments
+# Application Setup Guide
 
-The example demonstrates how to create Preview Environments based on Pull Request event with Flux Operator and [Ephemeral Environments](https://fluxcd.control-plane.io/operator/resourcesets/github-pull-requests/).
+This guide explains how to set up and deploy the application using OpenTofu, Kubernetes, and related tools.
 
-Note: The GitHub repository* is created and auto initialised ready for Flux stack, Flux Operator and Discord notifications to use.
+## Prerequisites
 
-###### *Creating a fine-gained PAT and dedicated Flux user recommend, for more information see [here](https://fluxcd.io/flux/installation/bootstrap/github/#github-organization)
+- Linux/Unix-based system
+- curl
+- wget
+- Kubernetes cluster (kind)
+- Git
 
+## Installation Steps
 
-## Quick Start
+### 1. Install Required Tools
 
-``` bash   
-bash ./codespace.sh   ###  Before run it, check which terminal you are using and review comment inside of file (part: install K9S) to avoid errors
-kubectl apply -f gatewayapi
-kubectl apply -f preview
-flux -n app-preview create secret git github-auth \
-   --url=https://github.com/org/app \
-   --username=flux \
-   --password=${GITHUB_TOKEN}
+First, install OpenTofu and K9s:
+
+```bash
+# Install OpenTofu
+curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method standalone 
+
+# Install K9S for cluster management
+curl -sS https://webi.sh/k9s | sh
 ```
 
-## Cleanup
-``` bash
+### 2. Setup Aliases
+
+Add these helpful aliases to your shell configuration:
+
+```bash
+alias kk="EDITOR='code --wait' k9s"
+alias tf=tofu
+alias k=kubectl
+```
+
+### 3. Initialize and Apply Infrastructure
+
+```bash
+# Navigate to bootstrap directory
 cd bootstrap
-tofu destroy
+
+# Initialize OpenTofu
+tofu init
+
+# Set up GitHub authentication
+# You will be prompted to enter your GitHub token securely
+export TF_VAR_github_token="$GITHUB_TOKEN"
+
+# Apply the infrastructure configuration
+tofu apply
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
+### 4. Deploy Gateway API
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7.0 |
-| <a name="requirement_flux"></a> [flux](#requirement\_flux) | >= 1.2 |
-| <a name="requirement_github"></a> [github](#requirement\_github) | >= 6.1 |
-| <a name="requirement_kind"></a> [kind](#requirement\_kind) | >= 0.4 |
+```bash
+# Install Gateway API components
+k apply -f ../gatewayapi
 
-## Providers
+# Verify services
+k get svc
+```
 
-| Name | Version |
-|------|---------|
-| <a name="provider_flux"></a> [flux](#provider\_flux) | >= 1.2 |
-| <a name="provider_github"></a> [github](#provider\_github) | >= 6.1 |
-| <a name="provider_kind"></a> [kind](#provider\_kind) | >= 0.4 |
+### 5. Install Kind Load Balancer
 
-## Resources
+```bash
+wget https://github.com/kubernetes-sigs/cloud-provider-kind/releases/download/v0.6.0/cloud-provider-kind_0.6.0_linux_amd64.tar.gz
+tar -xvzf cloud-provider-kind_0.6.0_linux_amd64.tar.gz -C /go/bin
+/go/bin/cloud-provider-kind >/dev/null 2>&1 &
+```
 
-| Name | Type |
-|------|------|
-| [flux_bootstrap_git.this](https://registry.terraform.io/providers/fluxcd/flux/latest/docs/resources/bootstrap_git) | resource |
-| [github_repository.this](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
-| [kind_cluster.this](https://registry.terraform.io/providers/tehcyx/kind/latest/docs/resources/cluster) | resource |
+### 6. Deploy Application Components
 
-## Inputs
+```bash
+# Deploy release configuration
+k apply -f ../release
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_github_org"></a> [github\_org](#input\_github\_org) | GitHub organization | `string` | `""` | no |
-| <a name="input_github_repository"></a> [github\_repository](#input\_github\_repository) | GitHub repository | `string` | `""` | no |
-| <a name="input_github_token"></a> [github\_token](#input\_github\_token) | GitHub token | `string` | `""` | no |
+# Deploy preview configuration
+k apply -f ../preview
 
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+# Create GitHub authentication secret in preview namespace
+kubectl create secret generic github-auth \
+  --from-literal=username=git \
+  --from-literal=password=${GITHUB_TOKEN} \
+  -n app-preview
+```
+
+### 7. Verify Deployment
+
+To verify the deployment, you can check the LoadBalancer IP and test the endpoints:
+
+```bash
+# Get LoadBalancer IP
+LB_IP=$(kubectl get svc -o jsonpath='{.items[?(@.metadata.name matches "envoy-envoy-gateway.*")].status.loadBalancer.ingress[0].ip}' -n envoy-gateway-system)
+
+# Test the main endpoint
+curl $LB_IP -HHost:kbot.example.com
+
+# Test preview endpoint
+curl $LB_IP/pr-40 -HHost:kbot.example.com
+```
+
+## Next Steps
+
+After successful deployment:
+1. Create Pull Request
+```
+# Test preview endpoint
+# Note: use your PR number e.g. 40
+curl $LB_IP/pr-40 -HHost:kbot.example.com
+```
+2. Merge your Pull Request
+3. Create a Release
+```
+# Test release endpoint
+curl $LB_IP -HHost:kbot.example.com
+```
+## Notes
+
+- Make sure to keep your GitHub token secure
+- Ensure all prerequisites are installed before starting the setup
+- Check service status using `kubectl get svc` if you encounter any issues

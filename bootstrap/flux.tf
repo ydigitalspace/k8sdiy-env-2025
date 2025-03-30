@@ -3,7 +3,8 @@
 # ==========================================
 resource "helm_release" "flux_operator" {
   depends_on = [kind_cluster.this]
-  count      = 0
+
+  count = var.flux_enable ? 1 : 0
 
   name             = "flux-operator"
   namespace        = "flux-system"
@@ -16,7 +17,7 @@ resource "helm_release" "flux_operator" {
 # ==========================================
 resource "helm_release" "flux_instance" {
   depends_on = [helm_release.flux_operator]
-  count      = 0
+  count = var.flux_enable ? 1 : 0
 
   name       = "flux-instance"
   namespace  = "flux-system"
