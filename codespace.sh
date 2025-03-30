@@ -5,6 +5,11 @@ curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-met
 # Install K9S to manage the cluster
 curl -sS https://webi.sh/k9s | sh
 
+# Create alias for k9s, kubectl and command-line autocompletion
+alias kk="EDITOR='code --wait' k9s"
+alias tf=tofu
+alias k=kubectl
+
 # Initialize Tofu
 cd bootstrap
 tofu init
@@ -18,21 +23,35 @@ export TF_VAR_github_token="$GITHUB_TOKEN"
 # Apply terrafrom configuration
 tofu apply
 
-# Create alias for k9s, kubectl and command-line autocompletion
-alias kk="EDITOR='code --wait' k9s"
-alias tf=tofu
-alias k=kubectl
-# source <(kubectl completion zsh)
+# Install Class and GW 
+k apply -f ../gatewayapi
 
-# kubectl create secret generic kbot --from-literal=token=$TELE_TOKEN -n app-preview
-#
-# export ENVOY_SERVICE=$(kubectl get svc -n envoy-gateway-system --selector=gateway.envoyproxy.io/owning-gateway-namespace=default,gateway.envoyproxy.io/owning-gateway-name=eg -o jsonpath='{.items[0].metadata.name}')
-#
-# kubectl -n envoy-gateway-system port-forward service/${ENVOY_SERVICE} 8888:80 &
-#
-# k apply -f preview
-# flux -n app-preview create secret git github-auth \
-#   --url=https://github.com/org/app \
-#   --username=flux \
-#   --password=${GITHUB_TOKEN}
-# # kubectl create secret generic github-auth --from-literal=token=${GITHUB_TOKEN} -n app-preview
+k get svc
+
+# Install kind loabalancer
+wget https://github.com/kubernetes-sigs/cloud-provider-kind/releases/download/v0.6.0/cloud-provider-kind_0.6.0_linux_amd64.tar.gz
+tar -xvzf cloud-provider-kind_0.6.0_linux_amd64.tar.gz -C /go/bin
+/go/bin/cloud-provider-kind >/dev/null 2>&1 &
+
+# Install Release
+k apply -f ../release
+# Retrieve the IP address of the LoadBalancer service
+LB_IP=$(kubectl get svc -o jsonpath='{.items[?(@.metadata.name matches "envoy-envoy-gateway.*")].status.loadBalancer.ingress[0].ip}' -n envoy-gateway-system) 
+echo "LoadBalancer IP: $LB_IP"
+# Check
+curl $LB_IP -HHost:kbot.example.com
+
+# Install preview
+k apply -f ../preview
+
+# Install secrets in preview
+kubectl create secret generic github-auth \
+--from-literal=username=git \
+--from-literal=password=${GITHUB_TOKEN} \
+-n app-preview
+
+# Open 
+curl $LB_IP/pr-40 -HHost:kbot.example.com
+
+# Merge PR
+# Create Release
