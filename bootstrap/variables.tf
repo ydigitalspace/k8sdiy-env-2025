@@ -14,10 +14,10 @@ variable "github_token" {
   description = "GitHub token"
   sensitive   = true
   type        = string
-  default     = null
 }
+
 variable "cluster_name" {
   description = "Cluster Name"
   type        = string
-  default     = "flux-preview-0"
+  default     = "flux-preview"
 }

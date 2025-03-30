@@ -18,6 +18,7 @@ resource "kind_cluster" "this" {
     }
     networking {
       kube_proxy_mode = "ipvs"
-   }
+    }
   }
 }
+
