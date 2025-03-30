@@ -2,8 +2,8 @@
 # Bootstrap Flux Operator
 # ==========================================
 resource "helm_release" "flux_operator" {
+  count      = 1
   depends_on = [kind_cluster.this]
-  count      = 0
 
   name             = "flux-operator"
   namespace        = "flux-system"
@@ -15,10 +15,10 @@ resource "helm_release" "flux_operator" {
 # Bootstrap Flux Instance
 # ==========================================
 resource "helm_release" "flux_instance" {
+  count      = 1
   depends_on = [helm_release.flux_operator]
-  count      = 0
 
-  name       = "flux-instance"
+  name       = "flux"
   namespace  = "flux-system"
   repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
   chart      = "flux-instance"
