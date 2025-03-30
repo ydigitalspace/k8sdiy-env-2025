@@ -6,6 +6,7 @@ resource "helm_release" "envoy_gateway" {
   name             = "eg"
   namespace        = "envoy-gateway-system"
   repository       = "oci://docker.io/envoyproxy"
-  chart            = "envoyproxy-helm"
+  chart            = "gateway-helm"
+  version          = "v1.3.2"
   create_namespace = true
 }

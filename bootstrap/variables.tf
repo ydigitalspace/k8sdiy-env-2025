@@ -7,7 +7,7 @@ variable "github_org" {
 variable "github_repository" {
   description = "GitHub repository"
   type        = string
-  default     = "flux-preview"
+  default     = "preview"
 }
 
 variable "github_token" {
