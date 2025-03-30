@@ -11,14 +11,14 @@ spec:
       name: app-pull-requests-kbot
   resources:
     - apiVersion: source.toolkit.fluxcd.io/v1
-      kind: OCIRepository
+      kind: GitRepository
       metadata:
         name: app-<< inputs.id >>
         namespace: app-preview
       spec:
         provider: generic # or 'github' if using GitHub App
         interval: 1m
-        url: oci://ghcr.io/den-vasyliev/charts/kbot
+        url: https://github.com/den-vasyliev/kbot-src
         ref:
           commit: << inputs.sha >>
         secretRef:
@@ -41,11 +41,10 @@ spec:
             chart: << inputs.chart >>
             reconcileStrategy: Revision
             sourceRef:
-              kind: OCIRepository
+              kind: GitRepository
               name: app-<< inputs.id >>
         values:
           gateway:
-            hostname: quietly-just-ferret.ngrok-free.app
             path: /pr-<< inputs.id >>
           image:
             tag: << inputs.sha >>
