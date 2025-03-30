@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Install OpenTofu
 curl -fsSL https://get.opentofu.org/install-opentofu.sh | sh -s -- --install-method standalone 
 

@@ -21,9 +21,3 @@ variable "cluster_name" {
   type        = string
   default     = "preview"
 }
-
-variable "flux_enable" {
-  description = "Enable Flux"
-  type        = bool
-  default     = false
-}
