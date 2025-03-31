@@ -3,7 +3,7 @@
 # ==========================================
 resource "helm_release" "flux_operator" {
   depends_on = [kind_cluster.this]
-  
+
   name             = "flux-operator"
   namespace        = "flux-system"
   repository       = "oci://ghcr.io/controlplaneio-fluxcd/charts"
