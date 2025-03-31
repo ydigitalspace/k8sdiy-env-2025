@@ -10,6 +10,7 @@ resource "helm_release" "flux_operator" {
   chart            = "flux-operator"
   create_namespace = true
 }
+
 # ==========================================
 # Bootstrap Flux Instance
 # ==========================================
