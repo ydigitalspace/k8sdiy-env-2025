@@ -1,6 +1,6 @@
 # Application Setup Guide
 
-This guide explains how to set up and deploy the application using OpenTofu, Kubernetes, and related tools.
+This guide explains how to set up and deploy the Ephemeral Environments using OpenTofu, Kubernetes.
 
 ## Prerequisites
 
