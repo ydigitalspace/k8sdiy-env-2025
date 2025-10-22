@@ -32,3 +32,20 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+
+# --- Local binaries and temporary tools ---
+# CLI binaries (never commit)
+kubectl
+kind
+flux
+helm
+terraform
+tofu
+
+# IDE / Codespaces / system files
+.vscode/
+*.log
+.DS_Store
+.env
+tmp/
+.cache/
