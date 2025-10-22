@@ -54,3 +54,6 @@ tmp/
 kubeconfig.yaml
 cluster-state.yaml
 .kind/
+
+# cloud-provider-kind tarballs
+cloud-provider-kind_*.tar.gz
