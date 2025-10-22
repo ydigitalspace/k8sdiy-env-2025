@@ -49,3 +49,8 @@ tofu
 .env
 tmp/
 .cache/
+
+# kind local artifacts
+kubeconfig.yaml
+cluster-state.yaml
+.kind/
